@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUTE Agency</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@550;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      color: #000000;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Lucide icons alignment setup */
+    .lucide {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* Scrollbar decoration */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff3e00;
+      border-radius: 4px;
+    }
+
+    /* Scroll scrolling viewport transitions */
+    [data-entrance] {
+      opacity: 0;
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    [data-entrance="slide-up"] {
+      transform: translateY(50px);
+    }
+    [data-entrance="fade-in"] {
+      /* Just opacity */
+    }
+    [data-entrance="zoom-in"] {
+      transform: scale(0.88);
+    }
+    [data-entrance="skew-in"] {
+      transform: translateY(35px) rotateX(8deg);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    /* Animation Active classes triggered by IntersectionObserver window listener */
+    [data-entrance].animate-active {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotateX(0);
+    }
+  </style>
+</head>
+<body style="background: #f5f5f5;">
+
+  <!-- Navbar Navigation (Sticky top-0) -->
+  <nav class="sticky top-0 z-50 py-4 px-6 border-b backdrop-blur-md" style="border-color: rgba(255,255,255,0.08); background-color: #fbbf24; text-color: #000000;">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <div style="background-color: #ff3e00;" class="w-3.5 h-3.5 rounded-sm"></div>
+        <span class="text-xl font-bold uppercase tracking-wider text-current" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+          MUTE Agency
+        </span>
+      </div>
+      <div class="flex gap-4 items-center font-mono text-xs opacity-80 overflow-x-auto max-w-[60vw] md:max-w-none no-scrollbar">
+        <a href="#sec-0" class="hover:underline transition-opacity font-bold shrink-0">/mutethenoise</a>
+        <a href="#sec-1" class="hover:underline transition-opacity font-bold shrink-0">/aestticapadr</a>
+        <a href="#sec-2" class="hover:underline transition-opacity font-bold shrink-0">/armamentismo</a>
+        <a href="#sec-3" class="hover:underline transition-opacity font-bold shrink-0">/manifestodee</a>
+        <a href="#sec-4" class="hover:underline transition-opacity font-bold shrink-0">/vocvaicontin</a>
+        <a href="#sec-5" class="hover:underline transition-opacity font-bold shrink-0">/muteagencyse</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Modular Sections Content -->
+  <main class="space-y-16 py-8">
+    
+    <section id="sec-0" data-entrance="slide-up" class="max-w-4xl mx-auto text-center py-20 px-6">
+      <div class="inline-block mb-4 px-3 py-1 text-[10px] tracking-widest uppercase font-semibold" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">
+        ✦ GERADO POR WOW EXPERT ✦
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+        MUTE THE NOISE. AMPLIFY THE TACTIC.
+      </h1>
+      <p class="text-base md:text-lg opacity-85 max-w-2xl mx-auto mb-8">
+        Destruímos o design genérico para criar campanhas de guerrilha que convertem sem pedir licença. Marketing puro, cru e brutal.
+      </p>
+      
+      <div class="mb-10 w-full max-w-xl mx-auto rounded-xl overflow-hidden border border-[rgba(255,255,255,0.1)] shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1548345680-f5475ea5df84?w=800" alt="Banner" class="w-full h-auto max-h-[350px] object-cover" referrerpolicy="no-referrer" />
+      </div>
+      
+      
+      <a href="#diagnostico" class="px-8 py-4 text-xs font-bold uppercase transition-all duration-300 inline-block hover:scale-105" style="background-color: #fbbf24; color: #000000; border: 4px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase; box-shadow: 4px 4px 0px #000000;">
+        DESTRUIR O GENÉRICO
+      </a>
+      
+    </section>
+        
+
+    <section id="sec-1" data-entrance="slide-up" class="text-center py-20 px-6 relative overflow-hidden flex flex-col items-center justify-center">
+      <div class="text-5xl md:text-8xl font-black opacity-15 uppercase absolute tracking-widest select-none" style="color: #ff3e00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+        A ESTÉTICA PADRONIZADA ESTÁ MATANDO O SEU LUCRO. REJEITE O CLICHÊ.
+      </div>
+      <div class="text-4xl md:text-7xl font-black py-4 select-none relative z-10 uppercase tracking-wide" style="color: #ff3e00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+        A ESTÉTICA PADRONIZADA ESTÁ MATANDO O SEU LUCRO. REJEITE O CLICHÊ.
+      </div>
+      
+      <p class="text-xs md:text-sm tracking-widest max-w-sm mt-4 font-mono font-bold relative z-10">
+        Se todo mundo grita com a mesma frequência de cores pastéis e promessas mágicas, o silêncio inteligente é o som mais alto do mercado.
+      </p>
+      
+    </section>
+        
+
+    <section id="sec-2" data-entrance="slide-up" class="max-w-4xl mx-auto py-16 px-6">
+      <div class="text-center max-w-lg mx-auto mb-10">
+        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">ARMAMENTISMO DIGITAL</h2>
+        <p class="text-xs opacity-70 mt-1">Nossas táticas não seguem cartilhas de agência gourmet. Nós criamos pontos de impacto reais no faturamento.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="flame"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">GUERRILLA</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Campanhas de Choque</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Marketing direto, cru e altamente persuasivo. Sem firulas visuais ou floreios corporativos, apenas o que converte o usuário imediato.</p>
+        </div>
+        
+      </div>
+        
+
+      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="eye"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">BRUTAL</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Anti-Identidade Visual</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Subvertemos as regras cromáticas comuns e fontes limpas demais para que sua marca seja a única impossível de ignorar na tela.</p>
+        </div>
+        
+      </div>
+        
+
+      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="shield"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">TACTICAL</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Psicologia de Escassez</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Sistemas de conversão que geram urgência visceral e real, estimulando a ação tática imediata através de copy de alta densidade tátil.</p>
+        </div>
+        
+      </div>
+        
+
+      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="terminal"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">HOSTILE</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Mídia Não Convencional</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Invasão de novos canais e guerrilha urbana digital. Vá exatamente onde seus concorrentes tradicionais têm medo de pisar.</p>
+        </div>
+        
+      </div>
+        
+      </div>
+    </section>
+        
+
+    <section id="sec-3" data-entrance="slide-up" class="max-w-xl mx-auto py-16 px-6">
+      <div class="text-center max-w-lg mx-auto mb-10">
+        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MANIFESTO DE EXECUÇÃO</h2>
+        <p class="text-xs opacity-70 mt-1">Nossos pilares operacionais ignoram o óbvio e focam no que de fato move os ponteiros financeiros da sua empresa.</p>
+      </div>
+      <div class="space-y-4">
+        
+      <div class="flex gap-4 p-5 items-center rounded-xl" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #ff3e00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+          <i data-lucide="trending-up"></i>
+        </div>
+        <div class="flex-1">
+          <div class="flex gap-2 items-center">
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Fidelidade Absoluta ao Fato</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">ROI-ONLY</span>
+          </div>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Não vendemos curtidas, impressões ou métricas de ego. Seu funil vai gerar receita líquida direta ou nós destruímos a rota atual imediatamente.</p>
+          
+        </div>
+      </div>
+        
+
+      <div class="flex gap-4 p-5 items-center rounded-xl" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #ff3e00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+          <i data-lucide="zap"></i>
+        </div>
+        <div class="flex-1">
+          <div class="flex gap-2 items-center">
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Velocidade Industrial</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">SPEED</span>
+          </div>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Seu mercado muda em minutos. Desenvolvemos, testamos e escalamos landing pages e fluxos de tráfego tático em menos de 72 horas úteis.</p>
+          
+        </div>
+      </div>
+        
+
+      <div class="flex gap-4 p-5 items-center rounded-xl" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #ff3e00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+          <i data-lucide="lock"></i>
+        </div>
+        <div class="flex-1">
+          <div class="flex gap-2 items-center">
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Blindagem de Conversão</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">SECURE</span>
+          </div>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Garantia técnica de que cada centavo investido em tráfego vá para interfaces otimizadas diretamente para a tomada de decisão rápida.</p>
+          
+        </div>
+      </div>
+        
+      </div>
+    </section>
+        
+
+    <section id="sec-4" data-entrance="slide-up" class="max-w-lg mx-auto py-16 px-6 font-sans">
+      <div class="p-8 rounded-2xl border text-center relative" style="background: #ffffff; border: 4px solid #000000;">
+        <div class="mb-4 inline-flex items-center justify-center p-3 rounded-full bg-white/5 mx-auto text-lime-400">
+          <i data-lucide="zap"></i>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-extrabold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">VOCÊ VAI CONTINUAR INVISÍVEL?</h2>
+        <p class="text-xs opacity-80 leading-relaxed max-w-sm mx-auto mb-6">Deixe seus dados de contato direto para receber um diagnóstico tático impiedoso de marketing. Sem rodeios, sem jargões, direto na ferida do seu funil.</p>
+        
+        <form onsubmit="event.preventDefault(); alert('Obrigado! Seus dados foram salvos com sucesso.'); this.reset();" class="space-y-4 max-w-sm mx-auto">
+          <div class="text-left font-bold">
+            <input type="text" required placeholder="Seu Nome Completo" class="w-full bg-black/40 border border-white/10 px-4 py-2.5 text-xs rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 font-bold" style="color: #ffffff;" />
+          </div>
+          <div class="text-left font-bold">
+            <input type="email" required placeholder="seu@email-elegante.com" class="w-full bg-black/40 border border-white/10 px-4 py-2.5 text-xs rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 font-bold" style="color: #ffffff;" />
+          </div>
+          <button type="submit" class="w-full py-3.5 text-xs tracking-wider uppercase font-bold transition-all duration-300 block hover:scale-[1.02]" style="background-color: #fbbf24; color: #000000; border: 4px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase; box-shadow: 4px 4px 0px #000000;">
+            SOLICITAR ATAQUE TÁTICO
+          </button>
+        </form>
+      </div>
+    </section>
+        
+
+    <footer id="sec-5" data-entrance="slide-up" class="max-w-4xl mx-auto py-12 px-6 border-t mt-16" style="border-color: rgba(255,255,255,0.08); color: #000000;">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <div class="space-y-3">
+          <h3 class="text-lg font-bold uppercase tracking-wider" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MUTE_AGENCY // SEM RUÍDO.</h3>
+          <p class="text-xs opacity-75 leading-relaxed max-w-xs">Operando na sombra da internet desde 2024. Todos os direitos reservados ou pirateados de forma justa.</p>
+          <div class="flex gap-3 pt-2 opacity-60 text-[10px]">
+            <span>INSTAGRAM</span>
+            <span>LINKEDIN</span>
+            <span>WHATSAPP</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-widest opacity-60">Navegação</h4>
+          <div class="flex flex-col gap-2">
+            
+              <a href="#sec-0" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
+                /mutethenoise
+              </a>
+            
+              <a href="#sec-1" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
+                /aestticapadr
+              </a>
+            
+              <a href="#sec-2" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
+                /armamentismo
+              </a>
+            
+              <a href="#sec-3" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
+                /manifestodee
+              </a>
+            
+              <a href="#sec-4" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
+                /vocvaicontin
+              </a>
+            
+              <a href="#sec-5" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
+                /muteagencyse
+              </a>
+            
+          </div>
+        </div>
+        <div class="space-y-3">
+          <h4 class="text-xs font-mono font-bold uppercase tracking-widest opacity-60">Recursos</h4>
+          
+            <div class="flex flex-col gap-2">
+              
+          <a href="Canal seguro criptografado de ponta a ponta." class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="lock"></i>
+            <span>Falar no Signal</span>
+          </a>
+        
+
+          <a href="Atualizações de táticas de guerrilha proibidas." class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="terminal"></i>
+            <span>Canal de Telegram</span>
+          </a>
+        
+
+          <a href="Envie sua proposta sem enrolações de pré-vendas." class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="layers"></i>
+            <span>E-mail Direto</span>
+          </a>
+        
+            </div>
+          
+        </div>
+      </div>
+      <div class="pt-8 mt-8 border-t border-[rgba(255,255,255,0.05)] flex flex-col sm:flex-row justify-between items-center text-[10px] opacity-40 font-mono gap-4 font-bold">
+        <span>© 2026 MUTE AGENCY. TODOS OS DIREITOS RESERVADOS.</span>
+        <span>BRUTALIST PRO POWERED</span>
+      </div>
+    </footer>
+        
+  </main>
+
+  <!-- Footer block -->
+  
+
+  <!-- Lucide icons loader script -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+
+    // Scroll interactive viewport observer initializer
+    document.addEventListener("DOMContentLoaded", () => {
+      const observerOptions = {
+        root: null,
+        rootMargin: "-20px 0px -40px 0px",
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-active");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll("[data-entrance]").forEach(el => {
+        // If element is already in screen or needs no transition, animate it
+        if (el.getAttribute("data-entrance") === "none") {
+          el.classList.add("animate-active");
+        } else {
+          observer.observe(el);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
