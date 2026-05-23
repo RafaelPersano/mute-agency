@@ -45,44 +45,50 @@
       background: rgba(0, 0, 0, 0.2);
     }
     ::-webkit-scrollbar-thumb {
-      background: #FF3E00;
+      background: #FFAF00;
       border-radius: 4px;
     }
 
     /* Scroll scrolling viewport transitions */
+    /* Primary layout elements visible by default (fallback if JS crashes) */
     [data-entrance] {
+      opacity: 1;
+    }
+    
+    /* Reveal and animations applied only if JS successfully executes */
+    .js-enabled [data-entrance] {
       opacity: 0;
       transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    [data-entrance="slide-up"] {
-      transform: translateY(60px);
+    .js-enabled [data-entrance="slide-up"] {
+      transform: translateY(30px);
     }
-    [data-entrance="fade-in"] {
+    .js-enabled [data-entrance="fade-in"] {
       /* Just opacity */
     }
-    [data-entrance="zoom-in"] {
-      transform: scale(0.9);
+    .js-enabled [data-entrance="zoom-in"] {
+      transform: scale(0.95);
     }
-    [data-entrance="skew-in"] {
-      transform: translateY(45px) rotateX(10deg);
+    .js-enabled [data-entrance="skew-in"] {
+      transform: translateY(25px) rotateX(5deg);
       transform-style: preserve-3d;
       perspective: 1000px;
     }
-    [data-entrance="bounce"] {
-      transform: scale(0.3) translateY(80px);
+    .js-enabled [data-entrance="bounce"] {
+      transform: scale(0.6) translateY(40px);
       transition: opacity 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
     /* Animation Active classes triggered by IntersectionObserver window listener */
-    [data-entrance].animate-active {
-      opacity: 1;
-      transform: translateY(0) scale(1) rotateX(0);
+    .js-enabled [data-entrance].animate-active {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) rotateX(0) !important;
     }
 
     /* Hover float and glass active styles */
     .hover-glow:hover {
-      box-shadow: 0 0 35px rgba(255, 62, 0, 0.25);
+      box-shadow: 0 0 35px rgba(255, 175, 0, 0.25);
     }
 
     /* No-scrollbar styling for preview elements */
@@ -102,34 +108,34 @@
     }
   </style>
 </head>
-<body style="background: #F3F4F6;">
+<body style="background: #F3F3F3;">
 
   <!-- Interactive Parallax Grid / Ambient Glow Backdrops -->
   <div class="wow-bg-parallax fixed inset-0 pointer-events-none z-0 opacity-[0.035]" style="background-image: linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px); background-size: 32px 32px;"></div>
   
   <!-- Interactive Mouse Spotlight Aura -->
-  <div id="wow-mouse-glow" class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-500 opacity-0 md:opacity-100" style="background: radial-gradient(600px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(255, 62, 0, 0.08), transparent 80%);"></div>
+  <div id="wow-mouse-glow" class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-500 opacity-0 md:opacity-100" style="background: radial-gradient(600px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(255, 175, 0, 0.08), transparent 80%);"></div>
   
   <!-- Mouse Follower Companions -->
-  <div id="wow-cursor-dot" class="pointer-events-none fixed top-0 left-0 w-2.5 h-2.5 rounded-full z-50 transition-opacity duration-300 opacity-0 pointer-events-none md:block hidden" style="border: 1px solid rgba(255, 62, 0, 0.6); background-color: rgba(255, 62, 0, 0.15);"></div>
-  <div id="wow-cursor-glow" class="pointer-events-none fixed top-0 left-0 w-40 h-40 rounded-full z-40 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0 pointer-events-none md:block hidden" style="background: radial-gradient(circle, rgba(255, 62, 0, 0.15) 0%, rgba(255, 62, 0, 0) 70%); mix-blend-mode: screen;"></div>
+  <div id="wow-cursor-dot" class="pointer-events-none fixed top-0 left-0 w-2.5 h-2.5 rounded-full z-50 transition-opacity duration-300 opacity-0 pointer-events-none md:block hidden" style="border: 1px solid rgba(255, 175, 0, 0.6); background-color: rgba(255, 175, 0, 0.15);"></div>
+  <div id="wow-cursor-glow" class="pointer-events-none fixed top-0 left-0 w-40 h-40 rounded-full z-40 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0 pointer-events-none md:block hidden" style="background: radial-gradient(circle, rgba(255, 175, 0, 0.15) 0%, rgba(255, 175, 0, 0) 70%); mix-blend-mode: screen;"></div>
 
   <!-- Navbar Navigation (Sticky top-0) -->
   <nav class="sticky top-0 z-50 py-4 px-6 border-b backdrop-blur-md" style="border-color: rgba(255,255,255,0.08); background-color: #fbbf24; text-color: #000000;">
     <div class="max-w-4xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-2">
-        <div style="background-color: #FF3E00;" class="w-3.5 h-3.5 rounded-sm"></div>
+        <div style="background-color: #FFAF00;" class="w-3.5 h-3.5 rounded-sm"></div>
         <span class="text-xl font-bold uppercase tracking-wider text-current" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">
           MUTE Agency
         </span>
       </div>
       <div class="flex gap-4 items-center font-mono text-xs opacity-80 overflow-x-auto max-w-[60vw] md:max-w-none no-scrollbar">
         <a href="#sec-0" class="hover:underline transition-opacity font-bold shrink-0">/menosrudomai</a>
-        <a href="#sec-1" class="hover:underline transition-opacity font-bold shrink-0">/marketinggue</a>
-        <a href="#sec-2" class="hover:underline transition-opacity font-bold shrink-0">/manifestoope</a>
-        <a href="#sec-3" class="hover:underline transition-opacity font-bold shrink-0">/nossosarmame</a>
-        <a href="#sec-4" class="hover:underline transition-opacity font-bold shrink-0">/soliciteumar</a>
-        <a href="#sec-5" class="hover:underline transition-opacity font-bold shrink-0">/mutecorp</a>
+        <a href="#sec-1" class="hover:underline transition-opacity font-bold shrink-0">/silnciopoder</a>
+        <a href="#sec-2" class="hover:underline transition-opacity font-bold shrink-0">/nossasdiretr</a>
+        <a href="#sec-3" class="hover:underline transition-opacity font-bold shrink-0">/nossoarsenal</a>
+        <a href="#sec-4" class="hover:underline transition-opacity font-bold shrink-0">/queroperarno</a>
+        <a href="#sec-5" class="hover:underline transition-opacity font-bold shrink-0">/muteagencyla</a>
       </div>
     </div>
   </nav>
@@ -142,35 +148,35 @@
         ✦ GERADO POR WOW EXPERT ✦
       </div>
       <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">
-        MENOS RUÍDO. MAIS IMPACTO TÁTICO.
+        MENOS RUÍDO. MAIS IMPACTO.
       </h1>
       <p class="text-base md:text-lg opacity-85 max-w-2xl mx-auto mb-8">
-        Destruímos a propaganda fofa para construir relevância brutal. Marketing sem firulas e sem adjetivos decorativos para marcas que cansaram de mentiras corporativas.
+        Destruímos o marketing tradicional para criar táticas de guerrilha digital que geram atenção absurda sem precisar gritar.
       </p>
       
       <div class="mb-10 w-full max-w-xl mx-auto rounded-xl overflow-hidden border border-[rgba(255,255,255,0.1)] shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800" alt="Banner" class="w-full h-auto max-h-[350px] object-cover" referrerpolicy="no-referrer" />
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200" alt="Banner" class="w-full h-auto max-h-[350px] object-cover" referrerpolicy="no-referrer" />
       </div>
       
       
       
       <a href="#auditoria" class="px-8 py-4 text-xs font-bold uppercase transition-all duration-300 inline-block hover:scale-105" style="background-color: #fbbf24; color: #000000; border: 4px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase; box-shadow: 4px 4px 0px #000000;">
-        INICIAR ATAQUE
+        ENTRAR EM CONTATO_ [Ctrl+Enter]
       </a>
       
     </section>
         
 
     <section id="sec-1" data-entrance="slide-up" class="text-center py-20 px-6 relative overflow-hidden flex flex-col items-center justify-center">
-      <div class="text-5xl md:text-8xl font-black opacity-15 uppercase absolute tracking-widest select-none" style="color: #FF3E00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
-        MARKETING É GUERRA, NÃO DECORAÇÃO.
+      <div class="text-5xl md:text-8xl font-black opacity-15 uppercase absolute tracking-widest select-none" style="color: #FFAF00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+        SILÊNCIO É PODER
       </div>
-      <div class="text-4xl md:text-7xl font-black py-4 select-none relative z-10 uppercase tracking-wide" style="color: #FF3E00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
-        MARKETING É GUERRA, NÃO DECORAÇÃO.
+      <div class="text-4xl md:text-7xl font-black py-4 select-none relative z-10 uppercase tracking-wide" style="color: #FFAF00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+        SILÊNCIO É PODER
       </div>
       
       <p class="text-xs md:text-sm tracking-widest max-w-sm mt-4 font-mono font-bold relative z-10">
-        O design comercial tradicional está anestesiado pelo excesso de simetria. Nós trazemos o contraste cru que força o clique e gera conversão real.
+        As marcas que mais faturam não tentam vencer o barulho da multidão; elas simplesmente silenciam a concorrência através de conversão implacável.
       </p>
       
     </section>
@@ -178,53 +184,69 @@
 
     <section id="sec-2" data-entrance="slide-up" class="max-w-4xl mx-auto py-16 px-6">
       <div class="text-center max-w-lg mx-auto mb-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MANIFESTO OPERACIONAL</h2>
-        <p class="text-xs opacity-70 mt-1">Três pilares de ação tática purificada de qualquer preciosismo corporativo.</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">NOSSAS DIRETRIZES DE COMBATE</h2>
+        <p class="text-xs opacity-70 mt-1">Como operamos nos bastidores para colocar seu produto no centro do holofote comercial.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+      <div class="wow-card p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
         <div>
           <div class="flex justify-between items-start mb-4">
-            <div class="p-2.5 rounded-lg" style="color: #FF3E00; background: rgba(255,255,255,0.04);">
+            <div class="p-2.5 rounded-lg" style="color: #FFAF00; background: rgba(255,255,255,0.04);">
               <i data-lucide="terminal"></i>
             </div>
-            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">CRU</span>
-          </div>
-          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">0% COLA DE AGÊNCIA</h3>
-          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Corte o blá-blá-blá dos relatórios de 80 páginas. Nós entregamos criativos crus baseados em atrito e tração de alta velocidade.</p>
-        </div>
-        
-        
-      </div>
-        
-
-      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-2.5 rounded-lg" style="color: #FF3E00; background: rgba(255,255,255,0.04);">
-              <i data-lucide="flame"></i>
-            </div>
-            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">MILITARIZADO</span>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">SYS-RAW</span>
           </div>
           <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">GUERRILHA DIGITAL</h3>
-          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Invasão sistemática de canais. Descobrimos onde seu cliente se esconde e criamos mensagens impossíveis de serem ignoradas.</p>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Campanhas que hackeiam a atenção orgânica e geram viralização massiva sem queimar orçamentos milionários.</p>
         </div>
         
         
       </div>
         
 
-      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+      <div class="wow-card p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
         <div>
           <div class="flex justify-between items-start mb-4">
-            <div class="p-2.5 rounded-lg" style="color: #FF3E00; background: rgba(255,255,255,0.04);">
-              <i data-lucide="eye"></i>
+            <div class="p-2.5 rounded-lg" style="color: #FFAF00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="layers"></i>
             </div>
-            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">MUTE</span>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">TACTICAL</span>
           </div>
-          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">ANTI-ESTÉTICA CHIQUE</h3>
-          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Layouts brutais que convertem 3x mais porque quebram o fluxo preguiçoso do scroll vertical infinito do mercado.</p>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">ENGENHARIA REVERSA</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Analisamos cada movimento do seu concorrente e exploramos as brechas invisíveis que eles deixaram para trás.</p>
+        </div>
+        
+        
+      </div>
+        
+
+      <div class="wow-card p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #FFAF00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="activity"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">99.8%</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">ARQUITETURA DE VALOR</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Design de alta fricção focado no que importa: velocidade máxima de carregamento e zero perda de leads.</p>
+        </div>
+        
+        
+      </div>
+        
+
+      <div class="wow-card p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #FFAF00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="coins"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">ROI-MAX</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">CONVERSÃO BRUTA</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Abandone as métricas de vaidade. Transformamos cliques frios em faturamento líquido real e escalável.</p>
         </div>
         
         
@@ -236,53 +258,53 @@
 
     <section id="sec-3" data-entrance="slide-up" class="max-w-xl mx-auto py-16 px-6">
       <div class="text-center max-w-lg mx-auto mb-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">NOSSOS ARMAMENTOS</h2>
-        <p class="text-xs opacity-70 mt-1">Estruturas de aquisição desenhadas para marcas que exigem domínio completo de seus nichos.</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">NOSSO ARSENAL TÁTICO</h2>
+        <p class="text-xs opacity-70 mt-1">Não criamos anúncios fofos. Desenvolvemos armas proprietárias de captação de mercado.</p>
       </div>
       <div class="space-y-4">
         
-      <div class="flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
-        <div style="color: #FF3E00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
-          <i data-lucide="trending-up"></i>
+      <div class="wow-card flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #FFAF00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+          <i data-lucide="sparkles"></i>
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex gap-2 items-center">
-            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">TRÁFEGO DE PRESSÃO</h4>
-            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">ROI EXTREMO</span>
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Copywriting Psicológico</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">HIGH IMPACT</span>
           </div>
-          <p class="text-xs opacity-75 mt-0.5 leading-snug">Distribuição cirúrgica de mídia paga focada em margem de contribuição pura. Não nos importamos com curtidas fúteis.</p>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Textos cirúrgicos que eliminam objeções irracionais de compra em menos de dez segundos de escaneamento visual.</p>
           
           
         </div>
       </div>
         
 
-      <div class="flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
-        <div style="color: #FF3E00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
-          <i data-lucide="zap"></i>
+      <div class="wow-card flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #FFAF00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+          <i data-lucide="sparkles"></i>
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex gap-2 items-center">
-            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">COPYWRITING DE IMPACTO</h4>
-            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">CONVERSÃO</span>
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Tráfego de Perseguição</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">SURVEILLANCE</span>
           </div>
-          <p class="text-xs opacity-75 mt-0.5 leading-snug">Textos diretos e sem rodeios. Direcionados à ação imediata do lead, sem espaço para hesitação ou dúvida.</p>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Segmentação obstinada que mapeia e engaja seus leads mais qualificados até a conversão final.</p>
           
           
         </div>
       </div>
         
 
-      <div class="flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
-        <div style="color: #FF3E00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
-          <i data-lucide="layers"></i>
+      <div class="wow-card flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #FFAF00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+          <i data-lucide="sparkles"></i>
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex gap-2 items-center">
-            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">DISRUPÇÃO DE CATEGORIA</h4>
-            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">MARKET-LEADER</span>
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Interfaces Antifrágeis</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">ULTRA SPEED</span>
           </div>
-          <p class="text-xs opacity-75 mt-0.5 leading-snug">Reposicionamos sua marca para monopolizar a atenção do seu setor através do isolamento estético.</p>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Websites desenvolvidos sob o rigor do código puro, otimizados para carregar instantaneamente em qualquer dispositivo.</p>
           
           
         </div>
@@ -293,12 +315,12 @@
         
 
     <section id="sec-4" data-entrance="slide-up" class="max-w-lg mx-auto py-16 px-6 font-sans">
-      <div class="p-8 rounded-2xl border text-center relative" style="background: #ffffff; border: 4px solid #000000;">
+      <div class="wow-card p-8 rounded-2xl border text-center relative" style="background: #ffffff; border: 4px solid #000000;">
         <div class="mb-4 inline-flex items-center justify-center p-3 rounded-full bg-white/5 mx-auto text-lime-400">
           <i data-lucide="zap"></i>
         </div>
-        <h2 class="text-2xl md:text-3xl font-extrabold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">SOLICITE UMA REVISÃO TÁTICA</h2>
-        <p class="text-xs opacity-80 leading-relaxed max-w-sm mx-auto mb-6">Não temos formulários coloridos ou pesquisas amigáveis. Diga quem você é se tiver a audácia de mudar seu modelo de aquisição hoje.</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">QUER OPERAR NO PRÓXIMO NÍVEL?</h2>
+        <p class="text-xs opacity-80 leading-relaxed max-w-sm mx-auto mb-6">Deixe os amadores discutindo curtidas de feed. Candidate sua empresa à nossa triagem de auditoria tática.</p>
         
         <form onsubmit="event.preventDefault(); alert('Obrigado! Seus dados foram salvos com sucesso.'); this.reset();" class="space-y-4 max-w-sm mx-auto">
           <div class="text-left font-bold">
@@ -308,7 +330,7 @@
             <input type="email" required placeholder="seu@email-elegante.com" class="w-full bg-black/40 border border-white/10 px-4 py-2.5 text-xs rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 font-bold" style="color: #ffffff;" />
           </div>
           <button type="submit" class="w-full py-3.5 text-xs tracking-wider uppercase font-bold transition-all duration-300 block hover:scale-[1.02]" style="background-color: #fbbf24; color: #000000; border: 4px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase; box-shadow: 4px 4px 0px #000000;">
-            DISPARAR PROTOCOLO
+            SOLICITAR AUDITORIA_V4
           </button>
         </form>
       </div>
@@ -318,8 +340,8 @@
     <footer id="sec-5" data-entrance="slide-up" class="max-w-4xl mx-auto py-12 px-6 border-t mt-16" style="border-color: rgba(255,255,255,0.08); color: #000000;">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
         <div class="space-y-3">
-          <h3 class="text-lg font-bold uppercase tracking-wider" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MUTE CORP.</h3>
-          <p class="text-xs opacity-75 leading-relaxed max-w-xs">Sem redes sociais fofas. Apenas canais diretos de comunicação e resultados de alta frequência.</p>
+          <h3 class="text-lg font-bold uppercase tracking-wider" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MUTE_AGENCY_LABS</h3>
+          <p class="text-xs opacity-75 leading-relaxed max-w-xs">Operando na contramão do design genérico e do marketing descartável.</p>
           <div class="flex gap-3 pt-2 opacity-60 text-[10px]">
             <span>INSTAGRAM</span>
             <span>LINKEDIN</span>
@@ -335,23 +357,23 @@
               </a>
             
               <a href="#sec-1" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /marketinggue
+                /silnciopoder
               </a>
             
               <a href="#sec-2" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /manifestoope
+                /nossasdiretr
               </a>
             
               <a href="#sec-3" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /nossosarmame
+                /nossoarsenal
               </a>
             
               <a href="#sec-4" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /soliciteumar
+                /queroperarno
               </a>
             
               <a href="#sec-5" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /mutecorp
+                /muteagencyla
               </a>
             
           </div>
@@ -361,15 +383,21 @@
           
             <div class="flex flex-col gap-2">
               
-          <a href="https://wa.me/muteagency" class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
-            <i data-lucide="activity"></i>
-            <span>CANAL DE TRANSMISSÃO</span>
+          <a href="https://t.me/mute_agency_labs" class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="sparkles"></i>
+            <span>[SYS_CANAL]</span>
           </a>
         
 
-          <a href="https://linkedin.com/company/mute-agency" class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
-            <i data-lucide="users"></i>
-            <span>PORTFÓLIO BRUTAL</span>
+          <a href="Caixa Postal 0929, Distrito Industrial" class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="sparkles"></i>
+            <span>[QG_FISICO]</span>
+          </a>
+        
+
+          <a href="Sistemas Ativos e Operacionais" class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="sparkles"></i>
+            <span>[SITUACAO_ATUAL]</span>
           </a>
         
             </div>
@@ -390,10 +418,22 @@
   <!-- Lucide icons loader script -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
-    lucide.createIcons();
+    // Enable progressive animation styles safely
+    document.documentElement.classList.add('js-enabled');
+
+    try {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    } catch (e) {
+      console.warn("Lucide icons standard loader bypassed:", e);
+    }
 
     // Scroll interactive viewport observer with elegant cascading stagger transitions
     document.addEventListener("DOMContentLoaded", () => {
+      // Unify selector queries to ensure all animated children align perfectly
+      const childrenQuery = "h1, h2, h3, h4, p, a, button, .wow-card, .grid > div, form, .flex-shrink-0, .wow-3d-canvas-container, img, li";
+
       // 1. Setup internal animations for elements inside loaded sections
       document.querySelectorAll("[data-entrance]").forEach(section => {
         const animType = section.getAttribute("data-entrance");
@@ -403,7 +443,7 @@
         }
 
         // Identify child elements that should stagger gracefully
-        const children = section.querySelectorAll("h1, h2, p, a, .grid > div, form, .flex-shrink-0, .wow-3d-canvas-container, img");
+        const children = section.querySelectorAll(childrenQuery);
         children.forEach((child, idx) => {
           child.style.opacity = "0";
           
@@ -428,8 +468,8 @@
 
       const observerOptions = {
         root: null,
-        rootMargin: "0px 0px -12% 0px",
-        threshold: 0.05
+        rootMargin: "0px 0px -5% 0px",
+        threshold: 0.01
       };
 
       const observer = new IntersectionObserver((entries, obs) => {
@@ -438,7 +478,7 @@
             entry.target.classList.add("animate-active");
             
             // Re-enable/animate children
-            const children = entry.target.querySelectorAll("h1, h2, p, a, .grid > div, form, .flex-shrink-0, .wow-3d-canvas-container, img");
+            const children = entry.target.querySelectorAll(childrenQuery);
             children.forEach(child => {
               child.style.opacity = "1";
               child.style.transform = "translateY(0) scale(1) rotateX(0)";
@@ -467,15 +507,14 @@
         document.querySelectorAll("[data-parallax-depth]").forEach(item => {
           const depth = parseFloat(item.getAttribute("data-parallax-depth") || "0.1");
           // Smooth translation
-          (item as HTMLElement).style.transform = "translateY(" + (-scrolled * depth) + "px)";
+          item.style.transform = "translateY(" + (-scrolled * depth) + "px)";
         });
       });
 
-      // 3. Real 3D Tilt Card Interactive Physics
-      // Select all grid card elements and container boxes
-      const tiltCards = document.querySelectorAll(".grid > div, form, section img, .border-slate-850");
+      // 3. Real 3D Tilt Card Interactive Physics (Bento, Carousel, Features cards, forms, images)
+      const tiltCards = document.querySelectorAll(".wow-card, .grid > div, form, section img, .border-slate-850");
       tiltCards.forEach(card => {
-        const cardEl = card as HTMLElement;
+        const cardEl = card;
         cardEl.classList.add("card-3d-interactive");
         
         cardEl.addEventListener("mousemove", (e) => {
@@ -493,13 +532,13 @@
           const rotY = ((x - xc) / xc) * maxRotation;
           
           cardEl.style.transform = "perspective(1000px) rotateX(" + rotX + "deg) rotateY(" + rotY + "deg) scale3d(1.015, 1.015, 1.015)";
-          cardEl.style.boxShadow = "0 15px 35px rgba(255, 62, 0, 0.15)";
+          cardEl.style.boxShadow = "0 15px 35px rgba(255, 175, 0, 0.15)";
           
           // Make the border of the active card glow up subtly
           if (cardEl.style.borderColor) {
             cardEl.setAttribute("data-old-border", cardEl.style.borderColor);
           }
-          cardEl.style.borderColor = "rgba(255, 62, 0, 0.4)";
+          cardEl.style.borderColor = "rgba(255, 175, 0, 0.4)";
         });
 
         cardEl.addEventListener("mouseleave", () => {
@@ -570,8 +609,8 @@
 
     // Interatividade Real 3D do WOW Builder
     document.addEventListener("DOMContentLoaded", () => {
-      const redDotColor = "255, 62, 0";
-      const accentColorHex = "#FF3E00";
+      const redDotColor = "255, 175, 0";
+      const accentColorHex = "#FFAF00";
       const canvasContainers = document.querySelectorAll(".wow-3d-canvas-container");
       
       canvasContainers.forEach(container => {
