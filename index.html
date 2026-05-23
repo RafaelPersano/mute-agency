@@ -45,29 +45,33 @@
       background: rgba(0, 0, 0, 0.2);
     }
     ::-webkit-scrollbar-thumb {
-      background: #ff3e00;
+      background: #FF3E00;
       border-radius: 4px;
     }
 
     /* Scroll scrolling viewport transitions */
     [data-entrance] {
       opacity: 0;
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     [data-entrance="slide-up"] {
-      transform: translateY(50px);
+      transform: translateY(60px);
     }
     [data-entrance="fade-in"] {
       /* Just opacity */
     }
     [data-entrance="zoom-in"] {
-      transform: scale(0.88);
+      transform: scale(0.9);
     }
     [data-entrance="skew-in"] {
-      transform: translateY(35px) rotateX(8deg);
+      transform: translateY(45px) rotateX(10deg);
       transform-style: preserve-3d;
       perspective: 1000px;
+    }
+    [data-entrance="bounce"] {
+      transform: scale(0.3) translateY(80px);
+      transition: opacity 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
     /* Animation Active classes triggered by IntersectionObserver window listener */
@@ -75,26 +79,57 @@
       opacity: 1;
       transform: translateY(0) scale(1) rotateX(0);
     }
+
+    /* Hover float and glass active styles */
+    .hover-glow:hover {
+      box-shadow: 0 0 35px rgba(255, 62, 0, 0.25);
+    }
+
+    /* No-scrollbar styling for preview elements */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Custom 3D Card Hover & Interactive Classes */
+    .card-3d-interactive {
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
   </style>
 </head>
-<body style="background: #f5f5f5;">
+<body style="background: #F3F4F6;">
+
+  <!-- Interactive Parallax Grid / Ambient Glow Backdrops -->
+  <div class="wow-bg-parallax fixed inset-0 pointer-events-none z-0 opacity-[0.035]" style="background-image: linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px); background-size: 32px 32px;"></div>
+  
+  <!-- Interactive Mouse Spotlight Aura -->
+  <div id="wow-mouse-glow" class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-500 opacity-0 md:opacity-100" style="background: radial-gradient(600px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(255, 62, 0, 0.08), transparent 80%);"></div>
+  
+  <!-- Mouse Follower Companions -->
+  <div id="wow-cursor-dot" class="pointer-events-none fixed top-0 left-0 w-2.5 h-2.5 rounded-full z-50 transition-opacity duration-300 opacity-0 pointer-events-none md:block hidden" style="border: 1px solid rgba(255, 62, 0, 0.6); background-color: rgba(255, 62, 0, 0.15);"></div>
+  <div id="wow-cursor-glow" class="pointer-events-none fixed top-0 left-0 w-40 h-40 rounded-full z-40 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0 pointer-events-none md:block hidden" style="background: radial-gradient(circle, rgba(255, 62, 0, 0.15) 0%, rgba(255, 62, 0, 0) 70%); mix-blend-mode: screen;"></div>
 
   <!-- Navbar Navigation (Sticky top-0) -->
   <nav class="sticky top-0 z-50 py-4 px-6 border-b backdrop-blur-md" style="border-color: rgba(255,255,255,0.08); background-color: #fbbf24; text-color: #000000;">
     <div class="max-w-4xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-2">
-        <div style="background-color: #ff3e00;" class="w-3.5 h-3.5 rounded-sm"></div>
+        <div style="background-color: #FF3E00;" class="w-3.5 h-3.5 rounded-sm"></div>
         <span class="text-xl font-bold uppercase tracking-wider text-current" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">
           MUTE Agency
         </span>
       </div>
       <div class="flex gap-4 items-center font-mono text-xs opacity-80 overflow-x-auto max-w-[60vw] md:max-w-none no-scrollbar">
-        <a href="#sec-0" class="hover:underline transition-opacity font-bold shrink-0">/mutethenoise</a>
-        <a href="#sec-1" class="hover:underline transition-opacity font-bold shrink-0">/aestticapadr</a>
-        <a href="#sec-2" class="hover:underline transition-opacity font-bold shrink-0">/armamentismo</a>
-        <a href="#sec-3" class="hover:underline transition-opacity font-bold shrink-0">/manifestodee</a>
-        <a href="#sec-4" class="hover:underline transition-opacity font-bold shrink-0">/vocvaicontin</a>
-        <a href="#sec-5" class="hover:underline transition-opacity font-bold shrink-0">/muteagencyse</a>
+        <a href="#sec-0" class="hover:underline transition-opacity font-bold shrink-0">/menosrudomai</a>
+        <a href="#sec-1" class="hover:underline transition-opacity font-bold shrink-0">/marketinggue</a>
+        <a href="#sec-2" class="hover:underline transition-opacity font-bold shrink-0">/manifestoope</a>
+        <a href="#sec-3" class="hover:underline transition-opacity font-bold shrink-0">/nossosarmame</a>
+        <a href="#sec-4" class="hover:underline transition-opacity font-bold shrink-0">/soliciteumar</a>
+        <a href="#sec-5" class="hover:underline transition-opacity font-bold shrink-0">/mutecorp</a>
       </div>
     </div>
   </nav>
@@ -107,34 +142,35 @@
         ✦ GERADO POR WOW EXPERT ✦
       </div>
       <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">
-        MUTE THE NOISE. AMPLIFY THE TACTIC.
+        MENOS RUÍDO. MAIS IMPACTO TÁTICO.
       </h1>
       <p class="text-base md:text-lg opacity-85 max-w-2xl mx-auto mb-8">
-        Destruímos o design genérico para criar campanhas de guerrilha que convertem sem pedir licença. Marketing puro, cru e brutal.
+        Destruímos a propaganda fofa para construir relevância brutal. Marketing sem firulas e sem adjetivos decorativos para marcas que cansaram de mentiras corporativas.
       </p>
       
       <div class="mb-10 w-full max-w-xl mx-auto rounded-xl overflow-hidden border border-[rgba(255,255,255,0.1)] shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1548345680-f5475ea5df84?w=800" alt="Banner" class="w-full h-auto max-h-[350px] object-cover" referrerpolicy="no-referrer" />
+        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800" alt="Banner" class="w-full h-auto max-h-[350px] object-cover" referrerpolicy="no-referrer" />
       </div>
       
       
-      <a href="#diagnostico" class="px-8 py-4 text-xs font-bold uppercase transition-all duration-300 inline-block hover:scale-105" style="background-color: #fbbf24; color: #000000; border: 4px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase; box-shadow: 4px 4px 0px #000000;">
-        DESTRUIR O GENÉRICO
+      
+      <a href="#auditoria" class="px-8 py-4 text-xs font-bold uppercase transition-all duration-300 inline-block hover:scale-105" style="background-color: #fbbf24; color: #000000; border: 4px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase; box-shadow: 4px 4px 0px #000000;">
+        INICIAR ATAQUE
       </a>
       
     </section>
         
 
     <section id="sec-1" data-entrance="slide-up" class="text-center py-20 px-6 relative overflow-hidden flex flex-col items-center justify-center">
-      <div class="text-5xl md:text-8xl font-black opacity-15 uppercase absolute tracking-widest select-none" style="color: #ff3e00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
-        A ESTÉTICA PADRONIZADA ESTÁ MATANDO O SEU LUCRO. REJEITE O CLICHÊ.
+      <div class="text-5xl md:text-8xl font-black opacity-15 uppercase absolute tracking-widest select-none" style="color: #FF3E00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+        MARKETING É GUERRA, NÃO DECORAÇÃO.
       </div>
-      <div class="text-4xl md:text-7xl font-black py-4 select-none relative z-10 uppercase tracking-wide" style="color: #ff3e00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
-        A ESTÉTICA PADRONIZADA ESTÁ MATANDO O SEU LUCRO. REJEITE O CLICHÊ.
+      <div class="text-4xl md:text-7xl font-black py-4 select-none relative z-10 uppercase tracking-wide" style="color: #FF3E00; font-family: 'JetBrains Mono', monospace; font-weight: bold;">
+        MARKETING É GUERRA, NÃO DECORAÇÃO.
       </div>
       
       <p class="text-xs md:text-sm tracking-widest max-w-sm mt-4 font-mono font-bold relative z-10">
-        Se todo mundo grita com a mesma frequência de cores pastéis e promessas mágicas, o silêncio inteligente é o som mais alto do mercado.
+        O design comercial tradicional está anestesiado pelo excesso de simetria. Nós trazemos o contraste cru que força o clique e gera conversão real.
       </p>
       
     </section>
@@ -142,67 +178,55 @@
 
     <section id="sec-2" data-entrance="slide-up" class="max-w-4xl mx-auto py-16 px-6">
       <div class="text-center max-w-lg mx-auto mb-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">ARMAMENTISMO DIGITAL</h2>
-        <p class="text-xs opacity-70 mt-1">Nossas táticas não seguem cartilhas de agência gourmet. Nós criamos pontos de impacto reais no faturamento.</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MANIFESTO OPERACIONAL</h2>
+        <p class="text-xs opacity-70 mt-1">Três pilares de ação tática purificada de qualquer preciosismo corporativo.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
       <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
         <div>
           <div class="flex justify-between items-start mb-4">
-            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
-              <i data-lucide="flame"></i>
-            </div>
-            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">GUERRILLA</span>
-          </div>
-          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Campanhas de Choque</h3>
-          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Marketing direto, cru e altamente persuasivo. Sem firulas visuais ou floreios corporativos, apenas o que converte o usuário imediato.</p>
-        </div>
-        
-      </div>
-        
-
-      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
-              <i data-lucide="eye"></i>
-            </div>
-            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">BRUTAL</span>
-          </div>
-          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Anti-Identidade Visual</h3>
-          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Subvertemos as regras cromáticas comuns e fontes limpas demais para que sua marca seja a única impossível de ignorar na tela.</p>
-        </div>
-        
-      </div>
-        
-
-      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
-              <i data-lucide="shield"></i>
-            </div>
-            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">TACTICAL</span>
-          </div>
-          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Psicologia de Escassez</h3>
-          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Sistemas de conversão que geram urgência visceral e real, estimulando a ação tática imediata através de copy de alta densidade tátil.</p>
-        </div>
-        
-      </div>
-        
-
-      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
-        <div>
-          <div class="flex justify-between items-start mb-4">
-            <div class="p-2.5 rounded-lg" style="color: #ff3e00; background: rgba(255,255,255,0.04);">
+            <div class="p-2.5 rounded-lg" style="color: #FF3E00; background: rgba(255,255,255,0.04);">
               <i data-lucide="terminal"></i>
             </div>
-            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">HOSTILE</span>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">CRU</span>
           </div>
-          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Mídia Não Convencional</h3>
-          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Invasão de novos canais e guerrilha urbana digital. Vá exatamente onde seus concorrentes tradicionais têm medo de pisar.</p>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">0% COLA DE AGÊNCIA</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Corte o blá-blá-blá dos relatórios de 80 páginas. Nós entregamos criativos crus baseados em atrito e tração de alta velocidade.</p>
         </div>
+        
+        
+      </div>
+        
+
+      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #FF3E00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="flame"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">MILITARIZADO</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">GUERRILHA DIGITAL</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Invasão sistemática de canais. Descobrimos onde seu cliente se esconde e criamos mensagens impossíveis de serem ignoradas.</p>
+        </div>
+        
+        
+      </div>
+        
+
+      <div class="p-6 rounded-xl transition-all duration-300 flex flex-col justify-between" style="background: #ffffff; border: 4px solid #000000;">
+        <div>
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2.5 rounded-lg" style="color: #FF3E00; background: rgba(255,255,255,0.04);">
+              <i data-lucide="eye"></i>
+            </div>
+            <span class="px-2 py-0.5 text-[8px]" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">MUTE</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">ANTI-ESTÉTICA CHIQUE</h3>
+          <p class="text-xs opacity-80 leading-relaxed min-h-[40px]">Layouts brutais que convertem 3x mais porque quebram o fluxo preguiçoso do scroll vertical infinito do mercado.</p>
+        </div>
+        
         
       </div>
         
@@ -212,51 +236,54 @@
 
     <section id="sec-3" data-entrance="slide-up" class="max-w-xl mx-auto py-16 px-6">
       <div class="text-center max-w-lg mx-auto mb-10">
-        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MANIFESTO DE EXECUÇÃO</h2>
-        <p class="text-xs opacity-70 mt-1">Nossos pilares operacionais ignoram o óbvio e focam no que de fato move os ponteiros financeiros da sua empresa.</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">NOSSOS ARMAMENTOS</h2>
+        <p class="text-xs opacity-70 mt-1">Estruturas de aquisição desenhadas para marcas que exigem domínio completo de seus nichos.</p>
       </div>
       <div class="space-y-4">
         
-      <div class="flex gap-4 p-5 items-center rounded-xl" style="background: #ffffff; border: 4px solid #000000;">
-        <div style="color: #ff3e00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+      <div class="flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #FF3E00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
           <i data-lucide="trending-up"></i>
         </div>
-        <div class="flex-1">
+        <div class="flex-1 min-w-0">
           <div class="flex gap-2 items-center">
-            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Fidelidade Absoluta ao Fato</h4>
-            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">ROI-ONLY</span>
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">TRÁFEGO DE PRESSÃO</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">ROI EXTREMO</span>
           </div>
-          <p class="text-xs opacity-75 mt-0.5 leading-snug">Não vendemos curtidas, impressões ou métricas de ego. Seu funil vai gerar receita líquida direta ou nós destruímos a rota atual imediatamente.</p>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Distribuição cirúrgica de mídia paga focada em margem de contribuição pura. Não nos importamos com curtidas fúteis.</p>
+          
           
         </div>
       </div>
         
 
-      <div class="flex gap-4 p-5 items-center rounded-xl" style="background: #ffffff; border: 4px solid #000000;">
-        <div style="color: #ff3e00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+      <div class="flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #FF3E00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
           <i data-lucide="zap"></i>
         </div>
-        <div class="flex-1">
+        <div class="flex-1 min-w-0">
           <div class="flex gap-2 items-center">
-            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Velocidade Industrial</h4>
-            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">SPEED</span>
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">COPYWRITING DE IMPACTO</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">CONVERSÃO</span>
           </div>
-          <p class="text-xs opacity-75 mt-0.5 leading-snug">Seu mercado muda em minutos. Desenvolvemos, testamos e escalamos landing pages e fluxos de tráfego tático em menos de 72 horas úteis.</p>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Textos diretos e sem rodeios. Direcionados à ação imediata do lead, sem espaço para hesitação ou dúvida.</p>
+          
           
         </div>
       </div>
         
 
-      <div class="flex gap-4 p-5 items-center rounded-xl" style="background: #ffffff; border: 4px solid #000000;">
-        <div style="color: #ff3e00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
-          <i data-lucide="lock"></i>
+      <div class="flex gap-4 p-5 items-center rounded-xl font-sans" style="background: #ffffff; border: 4px solid #000000;">
+        <div style="color: #FF3E00; background: rgba(255,255,255,0.035);" class="p-3 rounded-lg flex-shrink-0">
+          <i data-lucide="layers"></i>
         </div>
-        <div class="flex-1">
+        <div class="flex-1 min-w-0">
           <div class="flex gap-2 items-center">
-            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">Blindagem de Conversão</h4>
-            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">SECURE</span>
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">DISRUPÇÃO DE CATEGORIA</h4>
+            <span class="text-[8px] px-1.5 py-0.2" style="background-color: #fbbf24; color: #000000; border: 2px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase;">MARKET-LEADER</span>
           </div>
-          <p class="text-xs opacity-75 mt-0.5 leading-snug">Garantia técnica de que cada centavo investido em tráfego vá para interfaces otimizadas diretamente para a tomada de decisão rápida.</p>
+          <p class="text-xs opacity-75 mt-0.5 leading-snug">Reposicionamos sua marca para monopolizar a atenção do seu setor através do isolamento estético.</p>
+          
           
         </div>
       </div>
@@ -270,8 +297,8 @@
         <div class="mb-4 inline-flex items-center justify-center p-3 rounded-full bg-white/5 mx-auto text-lime-400">
           <i data-lucide="zap"></i>
         </div>
-        <h2 class="text-2xl md:text-3xl font-extrabold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">VOCÊ VAI CONTINUAR INVISÍVEL?</h2>
-        <p class="text-xs opacity-80 leading-relaxed max-w-sm mx-auto mb-6">Deixe seus dados de contato direto para receber um diagnóstico tático impiedoso de marketing. Sem rodeios, sem jargões, direto na ferida do seu funil.</p>
+        <h2 class="text-2xl md:text-3xl font-extrabold mb-2 uppercase" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">SOLICITE UMA REVISÃO TÁTICA</h2>
+        <p class="text-xs opacity-80 leading-relaxed max-w-sm mx-auto mb-6">Não temos formulários coloridos ou pesquisas amigáveis. Diga quem você é se tiver a audácia de mudar seu modelo de aquisição hoje.</p>
         
         <form onsubmit="event.preventDefault(); alert('Obrigado! Seus dados foram salvos com sucesso.'); this.reset();" class="space-y-4 max-w-sm mx-auto">
           <div class="text-left font-bold">
@@ -281,7 +308,7 @@
             <input type="email" required placeholder="seu@email-elegante.com" class="w-full bg-black/40 border border-white/10 px-4 py-2.5 text-xs rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-white/20 font-bold" style="color: #ffffff;" />
           </div>
           <button type="submit" class="w-full py-3.5 text-xs tracking-wider uppercase font-bold transition-all duration-300 block hover:scale-[1.02]" style="background-color: #fbbf24; color: #000000; border: 4px solid #000000; font-family: monospace; font-weight: bold; text-transform: uppercase; box-shadow: 4px 4px 0px #000000;">
-            SOLICITAR ATAQUE TÁTICO
+            DISPARAR PROTOCOLO
           </button>
         </form>
       </div>
@@ -291,8 +318,8 @@
     <footer id="sec-5" data-entrance="slide-up" class="max-w-4xl mx-auto py-12 px-6 border-t mt-16" style="border-color: rgba(255,255,255,0.08); color: #000000;">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
         <div class="space-y-3">
-          <h3 class="text-lg font-bold uppercase tracking-wider" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MUTE_AGENCY // SEM RUÍDO.</h3>
-          <p class="text-xs opacity-75 leading-relaxed max-w-xs">Operando na sombra da internet desde 2024. Todos os direitos reservados ou pirateados de forma justa.</p>
+          <h3 class="text-lg font-bold uppercase tracking-wider" style="font-family: 'JetBrains Mono', monospace; font-weight: bold;">MUTE CORP.</h3>
+          <p class="text-xs opacity-75 leading-relaxed max-w-xs">Sem redes sociais fofas. Apenas canais diretos de comunicação e resultados de alta frequência.</p>
           <div class="flex gap-3 pt-2 opacity-60 text-[10px]">
             <span>INSTAGRAM</span>
             <span>LINKEDIN</span>
@@ -304,27 +331,27 @@
           <div class="flex flex-col gap-2">
             
               <a href="#sec-0" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /mutethenoise
+                /menosrudomai
               </a>
             
               <a href="#sec-1" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /aestticapadr
+                /marketinggue
               </a>
             
               <a href="#sec-2" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /armamentismo
+                /manifestoope
               </a>
             
               <a href="#sec-3" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /manifestodee
+                /nossosarmame
               </a>
             
               <a href="#sec-4" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /vocvaicontin
+                /soliciteumar
               </a>
             
               <a href="#sec-5" class="text-xs opacity-75 hover:opacity-100 transition-opacity text-left hover:underline">
-                /muteagencyse
+                /mutecorp
               </a>
             
           </div>
@@ -334,21 +361,15 @@
           
             <div class="flex flex-col gap-2">
               
-          <a href="Canal seguro criptografado de ponta a ponta." class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
-            <i data-lucide="lock"></i>
-            <span>Falar no Signal</span>
+          <a href="https://wa.me/muteagency" class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="activity"></i>
+            <span>CANAL DE TRANSMISSÃO</span>
           </a>
         
 
-          <a href="Atualizações de táticas de guerrilha proibidas." class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
-            <i data-lucide="terminal"></i>
-            <span>Canal de Telegram</span>
-          </a>
-        
-
-          <a href="Envie sua proposta sem enrolações de pré-vendas." class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
-            <i data-lucide="layers"></i>
-            <span>E-mail Direto</span>
+          <a href="https://linkedin.com/company/mute-agency" class="text-xs opacity-75 hover:opacity-100 transition-opacity flex items-center gap-1.5" style="color: #000000; text-decoration: none;">
+            <i data-lucide="users"></i>
+            <span>PORTFÓLIO BRUTAL</span>
           </a>
         
             </div>
@@ -371,30 +392,434 @@
   <script>
     lucide.createIcons();
 
-    // Scroll interactive viewport observer initializer
+    // Scroll interactive viewport observer with elegant cascading stagger transitions
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Setup internal animations for elements inside loaded sections
+      document.querySelectorAll("[data-entrance]").forEach(section => {
+        const animType = section.getAttribute("data-entrance");
+        if (animType === "none") {
+          section.classList.add("animate-active");
+          return;
+        }
+
+        // Identify child elements that should stagger gracefully
+        const children = section.querySelectorAll("h1, h2, p, a, .grid > div, form, .flex-shrink-0, .wow-3d-canvas-container, img");
+        children.forEach((child, idx) => {
+          child.style.opacity = "0";
+          
+          if (animType === "slide-up" || !animType) {
+            child.style.transform = "translateY(30px)";
+          } else if (animType === "zoom-in") {
+            child.style.transform = "scale(0.92)";
+          } else if (animType === "skew-in") {
+            child.style.transform = "translateY(25px) rotateX(6deg)";
+          } else if (animType === "bounce") {
+            child.style.transform = "scale(0.7) translateY(40px)";
+          }
+          
+          if (animType === "bounce") {
+            child.style.transition = "opacity 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+          } else {
+            child.style.transition = "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+          }
+          child.style.transitionDelay = (idx * 0.08) + "s";
+        });
+      });
+
       const observerOptions = {
         root: null,
-        rootMargin: "-20px 0px -40px 0px",
-        threshold: 0.1
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.05
       };
 
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add("animate-active");
+            
+            // Re-enable/animate children
+            const children = entry.target.querySelectorAll("h1, h2, p, a, .grid > div, form, .flex-shrink-0, .wow-3d-canvas-container, img");
+            children.forEach(child => {
+              child.style.opacity = "1";
+              child.style.transform = "translateY(0) scale(1) rotateX(0)";
+            });
+            
             obs.unobserve(entry.target);
           }
         });
       }, observerOptions);
 
       document.querySelectorAll("[data-entrance]").forEach(el => {
-        // If element is already in screen or needs no transition, animate it
-        if (el.getAttribute("data-entrance") === "none") {
-          el.classList.add("animate-active");
-        } else {
-          observer.observe(el);
+        observer.observe(el);
+      });
+
+      // 2. Continuous Parallax Engine on Scroll (Section items floating offset/slow body background)
+      window.addEventListener("scroll", () => {
+        const scrolled = window.scrollY;
+        
+        // Background slow parallax effect
+        const bgParallax = document.querySelector(".wow-bg-parallax");
+        if (bgParallax) {
+          bgParallax.style.transform = "translateY(" + (scrolled * 0.15) + "px)";
         }
+
+        // Apply visual parallax to certain element types like floating tags, custom images, badges
+        document.querySelectorAll("[data-parallax-depth]").forEach(item => {
+          const depth = parseFloat(item.getAttribute("data-parallax-depth") || "0.1");
+          // Smooth translation
+          (item as HTMLElement).style.transform = "translateY(" + (-scrolled * depth) + "px)";
+        });
+      });
+
+      // 3. Real 3D Tilt Card Interactive Physics
+      // Select all grid card elements and container boxes
+      const tiltCards = document.querySelectorAll(".grid > div, form, section img, .border-slate-850");
+      tiltCards.forEach(card => {
+        const cardEl = card as HTMLElement;
+        cardEl.classList.add("card-3d-interactive");
+        
+        cardEl.addEventListener("mousemove", (e) => {
+          const rect = cardEl.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          // Calculate center of target card
+          const xc = rect.width / 2;
+          const yc = rect.height / 2;
+          
+          // Max rotation degrees
+          const maxRotation = 8;
+          const rotX = ((yc - y) / yc) * maxRotation;
+          const rotY = ((x - xc) / xc) * maxRotation;
+          
+          cardEl.style.transform = "perspective(1000px) rotateX(" + rotX + "deg) rotateY(" + rotY + "deg) scale3d(1.015, 1.015, 1.015)";
+          cardEl.style.boxShadow = "0 15px 35px rgba(255, 62, 0, 0.15)";
+          
+          // Make the border of the active card glow up subtly
+          if (cardEl.style.borderColor) {
+            cardEl.setAttribute("data-old-border", cardEl.style.borderColor);
+          }
+          cardEl.style.borderColor = "rgba(255, 62, 0, 0.4)";
+        });
+
+        cardEl.addEventListener("mouseleave", () => {
+          cardEl.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+          cardEl.style.boxShadow = "";
+          
+          const oldBorder = cardEl.getAttribute("data-old-border");
+          if (oldBorder) {
+            cardEl.style.borderColor = oldBorder;
+          } else {
+            cardEl.style.borderColor = "";
+          }
+        });
+      });
+
+      // 4. Cursor Tracking Spotlights & Trailing Companion Follower
+      const spotlight = document.getElementById("wow-mouse-glow");
+      const cursorDot = document.getElementById("wow-cursor-dot");
+      const cursorGlow = document.getElementById("wow-cursor-glow");
+
+      let currentX = window.innerWidth / 2;
+      let currentY = window.innerHeight / 2;
+      let targetX = currentX;
+      let targetY = currentY;
+
+      document.addEventListener("mousemove", (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+
+        // Instant mouse coordinates on spotlight css vars
+        if (spotlight) {
+          spotlight.style.setProperty("--mouse-x", targetX + "px");
+          spotlight.style.setProperty("--mouse-y", targetY + "px");
+          spotlight.style.opacity = "1";
+        }
+      });
+
+      document.body.addEventListener("mouseenter", () => {
+        if (cursorDot) cursorDot.style.opacity = "1";
+        if (cursorGlow) cursorGlow.style.opacity = "1";
+        if (spotlight) spotlight.style.opacity = "1";
+      });
+
+      document.body.addEventListener("mouseleave", () => {
+        if (cursorDot) cursorDot.style.opacity = "0";
+        if (cursorGlow) cursorGlow.style.opacity = "0";
+        if (spotlight) spotlight.style.opacity = "0";
+      });
+
+      // Spring-physics interpolation loop for laggy smooth follow cursor companion
+      const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
+      
+      const renderFollower = () => {
+        currentX = lerp(currentX, targetX, 0.15);
+        currentY = lerp(currentY, targetY, 0.15);
+
+        if (cursorDot) {
+          cursorDot.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0) translate(-50%, -50%)";
+        }
+        if (cursorGlow) {
+          cursorGlow.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0) translate(-50%, -50%)";
+        }
+        
+        requestAnimationFrame(renderFollower);
+      };
+      renderFollower();
+    });
+
+    // Interatividade Real 3D do WOW Builder
+    document.addEventListener("DOMContentLoaded", () => {
+      const redDotColor = "255, 62, 0";
+      const accentColorHex = "#FF3E00";
+      const canvasContainers = document.querySelectorAll(".wow-3d-canvas-container");
+      
+      canvasContainers.forEach(container => {
+        const type = container.getAttribute("data-3d-type");
+        const canvas = container.querySelector("canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        
+        let width, height;
+        const resize = () => {
+          width = container.clientWidth;
+          height = container.clientHeight;
+          canvas.width = width * window.devicePixelRatio;
+          canvas.height = height * window.devicePixelRatio;
+          ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        };
+        resize();
+        window.addEventListener("resize", () => {
+          resize();
+        });
+        
+        // Track mouse movement over root parent card/section for parallax
+        let offsetX = 0;
+        let offsetY = 0;
+        const rootElement = container.closest("div") || container.closest("section") || document.body;
+        
+        rootElement.addEventListener("mousemove", (e) => {
+          const rect = rootElement.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          offsetX = (x - 0.5) * 2;
+          offsetY = (y - 0.5) * 2;
+        });
+        
+        rootElement.addEventListener("mouseleave", () => {
+          offsetX = 0;
+          offsetY = 0;
+        });
+
+        // Initialize variables for animations
+        let frame = 0;
+        
+        // 1. STARFIELD Setup
+        const stars = [];
+        if (type === "starfield") {
+          for (let i = 0; i < 90; i++) {
+            stars.push({
+              x: (Math.random() - 0.5) * 1000,
+              y: (Math.random() - 0.5) * 1000,
+              z: Math.random() * 1000,
+              size: Math.random() * 1.5 + 0.5,
+              speed: Math.random() * 3 + 2
+            });
+          }
+        }
+        
+        // 2. CYBER-RAIN Setup
+        const cols = Math.floor(width / 14) || 20;
+        const rainDrops = [];
+        if (type === "cyber-rain") {
+          for (let i = 0; i < cols; i++) {
+            rainDrops[i] = Math.random() * -100;
+          }
+        }
+        
+        // 3. WIREFRAME HYPERCUBE Setup
+        const cubeVertices = [
+          { x: -1, y: -1, z: -1 }, { x: 1, y: -1, z: -1 }, { x: 1, y: 1, z: -1 }, { x: -1, y: 1, z: -1 },
+          { x: -1, y: -1, z: 1 }, { x: 1, y: -1, z: 1 }, { x: 1, y: 1, z: 1 }, { x: -1, y: 1, z: 1 }
+        ];
+        const cubeEdges = [
+          [0, 1], [1, 2], [2, 3], [3, 0],
+          [4, 5], [5, 6], [6, 7], [7, 4],
+          [0, 4], [1, 5], [2, 6], [3, 7]
+        ];
+        
+        const tick = () => {
+          frame++;
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = "rgba(10, 10, 14, 0.25)";
+          ctx.fillRect(0, 0, width, height);
+          
+          if (type === "starfield") {
+            ctx.fillStyle = "rgba(10, 10, 18, 0.8)";
+            ctx.fillRect(0, 0, width, height);
+            for (let i = 0; i < stars.length; i++) {
+              const star = stars[i];
+              star.z -= star.speed + Math.abs(offsetY * 5);
+              const dx = star.x - offsetX * 1500;
+              const dy = star.y - offsetY * 1500;
+              if (star.z <= 0) {
+                star.z = 1000;
+                star.x = (Math.random() - 0.5) * 1000;
+                star.y = (Math.random() - 0.5) * 1000;
+              }
+              const depthScale = 300 / star.z;
+              const projX = dx * depthScale + width / 2;
+              const projY = dy * depthScale + height / 2;
+              if (projX >= 0 && projX <= width && projY >= 0 && projY <= height) {
+                const size = star.size * depthScale * 2;
+                const starAlpha = Math.min(1, 1 - star.z / 1000);
+                ctx.beginPath();
+                ctx.arc(projX, projY, size, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(" + redDotColor + ", " + starAlpha + ")";
+                ctx.shadowBlur = size * 3;
+                ctx.shadowColor = accentColorHex;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+              }
+            }
+          }
+          else if (type === "waves") {
+            ctx.strokeStyle = "rgba(" + redDotColor + ", 0.5)";
+            ctx.lineWidth = 1.5;
+            const waveLines = 8;
+            const segmentCount = 45;
+            for (let j = 0; j < waveLines; j++) {
+              ctx.beginPath();
+              const waveProgress = j / waveLines;
+              const waveAlpha = (1 - waveProgress) * 0.7 + 0.1;
+              ctx.strokeStyle = "rgba(" + redDotColor + ", " + waveAlpha + ")";
+              ctx.shadowBlur = j === 0 ? 10 : 0;
+              ctx.shadowColor = accentColorHex;
+              for (let i = 0; i <= segmentCount; i++) {
+                const segProgress = i / segmentCount;
+                const x = segProgress * width;
+                const angle = segProgress * Math.PI * 3 + frame * 0.03 + j * 0.4;
+                const tiltFactor = (offsetX * 30 * (1 - segProgress)) + (offsetY * 30);
+                const amplitude = 22 * (1.2 - waveProgress) * Math.sin(frame * 0.005 + j * 0.2);
+                const y = (height / 2) + Math.sin(angle) * amplitude + (j * 14 - (waveLines * 7)) + tiltFactor;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+              }
+              ctx.stroke();
+            }
+            ctx.shadowBlur = 0;
+          }
+          else if (type === "cube") {
+            const rotX = frame * 0.012 + offsetY * 0.5;
+            const rotY = frame * 0.008 + offsetX * 0.5;
+            const rotZ = frame * 0.006;
+            const rotatedVertices = cubeVertices.map(v => {
+              let x1 = v.x * Math.cos(rotZ) - v.y * Math.sin(rotZ);
+              let y1 = v.x * Math.sin(rotZ) + v.y * Math.cos(rotZ);
+              let z1 = v.z;
+              let x2 = x1 * Math.cos(rotY) + z1 * Math.sin(rotY);
+              let y2 = y1;
+              let z2 = -x1 * Math.sin(rotY) + z1 * Math.cos(rotY);
+              let x3 = x2;
+              let y3 = y2 * Math.cos(rotX) - z2 * Math.sin(rotX);
+              let z3 = y2 * Math.sin(rotX) + z2 * Math.cos(rotX);
+              return { x: x3, y: y3, z: z3 };
+            });
+            const d = 3.5;
+            const scaleFactor = Math.min(width, height) * 0.35;
+            const projVertices = rotatedVertices.map(v => {
+              const perspectiveScale = d / (v.z + d);
+              const x = (v.x * perspectiveScale * scaleFactor) + width / 2;
+              const y = (v.y * perspectiveScale * scaleFactor) + height / 2;
+              return { x, y, z: v.z };
+            });
+            projVertices.forEach(v => {
+              const depthOpacity = Math.max(0.1, Math.min(1.0, (d - v.z) / (d * 1.5)));
+              ctx.beginPath();
+              ctx.arc(v.x, v.y, 4, 0, Math.PI * 2);
+              ctx.fillStyle = "rgba(" + redDotColor + ", " + depthOpacity + ")";
+              ctx.shadowBlur = 8;
+              ctx.shadowColor = accentColorHex;
+              ctx.fill();
+            });
+            ctx.lineWidth = 2;
+            cubeEdges.forEach(([start, end]) => {
+              const vStart = projVertices[start];
+              const vEnd = projVertices[end];
+              const avgZ = (vStart.z + vEnd.z) / 2;
+              const depthOpacity = Math.max(0.08, Math.min(1.0, (d - avgZ) / (d * 1.5)));
+              ctx.beginPath();
+              ctx.moveTo(vStart.x, vStart.y);
+              ctx.lineTo(vEnd.x, vEnd.y);
+              ctx.strokeStyle = "rgba(" + redDotColor + ", " + (depthOpacity * 0.7) + ")";
+              ctx.shadowBlur = 5 * depthOpacity;
+              ctx.shadowColor = accentColorHex;
+              ctx.stroke();
+            });
+            ctx.shadowBlur = 0;
+          }
+          else if (type === "cyber-rain") {
+            ctx.fillStyle = "rgba(10, 10, 15, 0.85)";
+            ctx.fillRect(0, 0, width, height);
+            ctx.font = "bold 11px monospace";
+            const chars = "XYZ✦⌥⌘⚡💎⚡0101λ✿✵❖⚡".split("");
+            const actualCols = Math.min(cols, Math.floor(width / 14));
+            for (let i = 0; i < actualCols; i++) {
+              const char = chars[Math.floor(Math.random() * chars.length)];
+              const xCoord = i * 15 + (offsetX * 15);
+              const yCoord = rainDrops[i] * 12;
+              if (yCoord > 0 && yCoord < height) {
+                const isTip = Math.random() > 0.94;
+                ctx.fillStyle = isTip ? "#ffffff" : "rgba(" + redDotColor + ", 0.75)";
+                if (isTip) {
+                  ctx.shadowBlur = 8;
+                  ctx.shadowColor = accentColorHex;
+                }
+                ctx.fillText(char, xCoord, yCoord);
+                ctx.shadowBlur = 0;
+              }
+              rainDrops[i] += 1 + Math.random() * 0.8 + Math.abs(offsetY * 1.5);
+              if (rainDrops[i] * 12 > height && Math.random() > 0.975) {
+                rainDrops[i] = 0;
+              }
+            }
+          }
+          else if (type === "plasma") {
+            const timeFactor = frame * 0.015;
+            const midX = width / 2 + (offsetX * (width * 0.25));
+            const midY = height / 2 + (offsetY * (height * 0.25));
+            const grad = ctx.createRadialGradient(midX, midY, 15, midX, midY, Math.max(width, height) * 0.75);
+            grad.addColorStop(0, "rgba(" + redDotColor + ", 0.45)");
+            grad.addColorStop(0.3, "rgba(" + redDotColor + ", 0.2)");
+            grad.addColorStop(0.65, "rgba(" + redDotColor + ", 0.05)");
+            grad.addColorStop(1, "rgba(10, 10, 14, 0)");
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+            const secX = width / 2 + Math.cos(timeFactor) * (width * 0.3) + (offsetX * 25);
+            const secY = height / 2 + Math.sin(timeFactor) * (height * 0.35) + (offsetY * 25);
+            const secGrad = ctx.createRadialGradient(secX, secY, 5, secX, secY, 120);
+            secGrad.addColorStop(0, "rgba(" + redDotColor + ", 0.3)");
+            secGrad.addColorStop(0.5, "rgba(" + redDotColor + ", 0.08)");
+            secGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+            ctx.fillStyle = secGrad;
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = "rgba(" + redDotColor + ", 0.35)";
+            for (let i = 0; i < 8; i++) {
+              const px = (Math.sin(timeFactor + i * 4) * 0.45 + 0.5) * width + (offsetX * 10);
+              const py = (Math.cos(timeFactor * 0.8 + i * 2) * 0.45 + 0.5) * height + (offsetY * 10);
+              ctx.beginPath();
+              ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+              ctx.shadowBlur = 6;
+              ctx.shadowColor = accentColorHex;
+              ctx.fill();
+            }
+            ctx.shadowBlur = 0;
+          }
+          
+          requestAnimationFrame(tick);
+        };
+        tick();
       });
     });
   </script>
